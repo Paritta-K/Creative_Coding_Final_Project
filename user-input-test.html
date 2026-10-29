@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Input Test</title>
+
+  <script src="libraries/p5.min.js"></script>
+  <script src="user-input.js"></script>
+</head>
+
+<body>
+  <script>
+    function setup() {
+      createCanvas(600, 400);
+    }
+
+    function draw() {
+      // Temporary pond background for testing
+      background(80, 130, 150);
+
+      // Draw the lily pads from user-input.js
+      drawUserLilyPads();
+    }
+
+    function mousePressed() {
+      // Only add lily pads when clicking inside the canvas
+      if (
+        mouseX >= 0 &&
+        mouseX <= width &&
+        mouseY >= 0 &&
+        mouseY <= height
+      ) {
+        addUserLilyPad();
+      }
+    }
+  </script>
+</body>
+</html>
