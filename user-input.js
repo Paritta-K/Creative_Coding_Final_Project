@@ -44,3 +44,73 @@ function drawUserLilyPads() {
     pop();
   }
 }
+// Interaction 2: Click an existing flower to open or close it.
+// AI-assisted draft, reviewed by the student.
+
+// Temporary flower data for independent testing.
+// These flowers can later be replaced by the group's flower data.
+let userFlowers = [
+  { x: 150, y: 130, isOpen: false },
+  { x: 350, y: 250, isOpen: true }
+];
+
+// Check whether the user clicked on an existing flower.
+function checkUserFlowerClick() {
+
+  for (let flower of userFlowers) {
+
+    let distance = dist(mouseX, mouseY, flower.x, flower.y);
+
+    if (distance < 30) {
+
+      // Switch between open and closed.
+      flower.isOpen = !flower.isOpen;
+
+      // Stop after finding the clicked flower.
+      return true;
+    }
+  }
+
+  // No flower was clicked.
+  return false;
+}
+
+// Draw the existing flowers.
+function drawUserFlowers() {
+
+  for (let flower of userFlowers) {
+
+    push();
+    translate(flower.x, flower.y);
+
+    noStroke();
+
+    if (flower.isOpen) {
+
+      // Open flower: five visible petals.
+      fill(245, 185, 205);
+
+      for (let i = 0; i < 5; i++) {
+        push();
+        rotate(i * TWO_PI / 5);
+        ellipse(0, -15, 18, 32);
+        pop();
+      }
+
+    } else {
+
+      // Closed flower: small overlapping petals.
+      fill(220, 130, 170);
+
+      ellipse(-6, 0, 12, 25);
+      ellipse(6, 0, 12, 25);
+      ellipse(0, -4, 12, 30);
+    }
+
+    // Flower centre.
+    fill(245, 205, 90);
+    circle(0, 0, 10);
+
+    pop();
+  }
+}
