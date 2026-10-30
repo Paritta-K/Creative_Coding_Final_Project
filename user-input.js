@@ -77,40 +77,49 @@ function checkUserFlowerClick() {
 
 // Draw the existing flowers.
 // Draw flowers with smooth opening and closing animation.
+// Draw flowers with smooth opening and closing animation.
 function drawUserFlowers() {
 
   for (let flower of userFlowers) {
 
-    // Choose the target openness.
+    // Set the target openness.
     let target = flower.isOpen ? 1 : 0;
 
-    // Smoothly move towards the target.
+    // Smoothly animate the opening and closing.
     flower.openness = lerp(flower.openness, target, 0.08);
 
     push();
     translate(flower.x, flower.y);
     noStroke();
 
-    // Draw five petals.
+    // Draw five petals when the flower opens.
     fill(245, 185, 205);
 
     for (let i = 0; i < 5; i++) {
       push();
-
       rotate(i * TWO_PI / 5);
 
-     // Petals fold inward when closed and spread out when open.
-let petalY = lerp(-3, -15, flower.openness);
-let petalWidth = lerp(3, 18, flower.openness);
-let petalHeight = lerp(24, 32, flower.openness);
+      // Petals gradually spread out.
+      let petalY = lerp(-3, -15, flower.openness);
+      let petalWidth = lerp(0, 18, flower.openness);
+      let petalHeight = lerp(0, 32, flower.openness);
 
-ellipse(0, petalY, petalWidth, petalHeight);
+      ellipse(0, petalY, petalWidth, petalHeight);
+
       pop();
     }
 
-    // Draw the flower centre.
+    // Draw a closed flower bud.
+    // The bud becomes smaller as the flower opens.
+    let budWidth = lerp(16, 0, flower.openness);
+    let budHeight = lerp(30, 0, flower.openness);
+
+    fill(220, 130, 170);
+    ellipse(0, -8, budWidth, budHeight);
+
+    // Draw the yellow centre as the flower opens.
     fill(245, 205, 90);
-    circle(0, 0, 10);
+    circle(0, 0, 10 * flower.openness);
 
     pop();
   }
