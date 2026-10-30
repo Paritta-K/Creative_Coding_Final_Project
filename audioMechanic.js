@@ -62,14 +62,28 @@ function drawWillowAudio() {
 
 function drawWillow(x, length, willowColor) {
   noFill();
-  stroke(willowColor);
-  strokeWeight(2);
 
-  // Draw a curved stem from the top of the canvas to the branch's current length.
+  // Draw a pale copy, shifted slightly right and down.
+  push();
+  translate(2, 2);
+  stroke(205, 225, 195, 200);
+
+  strokeWeight(5);
   bezier(x, 0, x - 6, length * 0.3,
          x + 6, length * 0.7, x, length);
 
-  // Draw two downward leaves: the upper one is longer.
+  strokeWeight(3);
+  line(x - 2, length * 0.35, x - 11, length * 0.35 + 16);
+  line(x + 2, length * 0.75, x + 7, length * 0.75 + 8);
+  pop();
+
+  // Draw the original green branch in front.
+  stroke(willowColor);
+  strokeWeight(5);
+  bezier(x, 0, x - 6, length * 0.3,
+         x + 6, length * 0.7, x, length);
+
+  strokeWeight(3);
   line(x - 2, length * 0.35, x - 11, length * 0.35 + 16);
   line(x + 2, length * 0.75, x + 7, length * 0.75 + 8);
 }
