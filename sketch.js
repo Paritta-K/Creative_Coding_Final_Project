@@ -72,9 +72,6 @@ function setup() {
 function draw() {
   background(0, 83, 100);
 
-  // Draw the willow branches using the current audio values.
-  drawWillowAudio();
-
   // Water base
   colorNoise.run();
 
@@ -93,6 +90,11 @@ function draw() {
 
   // Lily pad stays static
   image(lilyPad, 0, 0);
+
+  
+  // Draw the willow branches using the current audio values.
+  drawWillowAudio();
+
 }
 
 function windowResized() {
