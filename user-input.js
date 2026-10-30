@@ -99,13 +99,12 @@ function drawUserFlowers() {
 
       rotate(i * TWO_PI / 5);
 
-      // Petals spread out as the flower opens.
-      let petalY = lerp(-5, -15, flower.openness);
-      let petalWidth = lerp(10, 18, flower.openness);
-      let petalHeight = lerp(25, 32, flower.openness);
+     // Petals fold inward when closed and spread out when open.
+let petalY = lerp(-3, -15, flower.openness);
+let petalWidth = lerp(3, 18, flower.openness);
+let petalHeight = lerp(24, 32, flower.openness);
 
-      ellipse(0, petalY, petalWidth, petalHeight);
-
+ellipse(0, petalY, petalWidth, petalHeight);
       pop();
     }
 
