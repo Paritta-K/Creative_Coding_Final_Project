@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Input Test</title>
+
+  <script src="libraries/p5.min.js"></script>
+  <script src="user-input.js"></script>
+</head>
+
+<body>
+  <script>
+    function setup() {
+      createCanvas(600, 400);
+    }
+
+   function draw() {
+  // Temporary pond background for testing
+  background(80, 130, 150);
+
+  // Draw user-created lily pads
+  drawUserLilyPads();
+
+  // Draw existing interactive flowers
+  drawUserFlowers();
+}
+    function mousePressed() {
+
+  // Only respond to clicks inside the canvas
+  if (
+    mouseX >= 0 &&
+    mouseX <= width &&
+    mouseY >= 0 &&
+    mouseY <= height
+  ) {
+
+    // Check if an existing flower was clicked
+    let clickedFlower = checkUserFlowerClick();
+
+    // Add a lily pad only when no flower was clicked
+    if (!clickedFlower) {
+      addUserLilyPad();
+    }
+  }
+}
+  </script>
+</body>
+</html>
