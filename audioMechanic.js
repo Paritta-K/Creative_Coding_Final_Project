@@ -1,3 +1,5 @@
+// Audio mechanic adapted from the Week 10 p5.js FFT tutorial.
+// ChatGPT helped develop the willow visual and organise the code into separate files.
 
 let song;
 let fft;
@@ -7,6 +9,8 @@ let currentLengths = [];
 let numBins = 128;
 let smoothing = 0.8;
 
+// Horizontal positions of 12 branches, expressed as fractions of canvas width.
+// Six are on the left and six are on the right.
 let willowPositions = [
   0.05, 0.12, 0.19, 0.26, 0.33, 0.40,
   0.60, 0.67, 0.74, 0.81, 0.88, 0.95
@@ -40,14 +44,17 @@ function drawWillowAudio() {
   ];
 
   for (let i = 0; i < willowPositions.length; i++) {
+    // Each branch uses a different frequency value.
     let energy = spectrum[i * 2];
     let x = willowPositions[i] * width;
 
+    // Stronger frequency energy makes the branch longer.
     let targetLength = map(
       energy, 0, 255,
       height * 0.10, height * 0.42
     );
 
+    // Change length gradually for gentler movement.
     currentLengths[i] = lerp(currentLengths[i], targetLength, 0.06);
     drawWillow(x, currentLengths[i], palette[i % 4]);
   }
@@ -58,9 +65,11 @@ function drawWillow(x, length, willowColor) {
   stroke(willowColor);
   strokeWeight(2);
 
+  // Draw a curved stem from the top of the canvas to the branch's current length.
   bezier(x, 0, x - 6, length * 0.3,
          x + 6, length * 0.7, x, length);
 
+  // Draw two downward leaves: the upper one is longer.
   line(x - 2, length * 0.35, x - 11, length * 0.35 + 16);
   line(x + 2, length * 0.75, x + 7, length * 0.75 + 8);
 }
