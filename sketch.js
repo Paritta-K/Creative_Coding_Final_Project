@@ -17,11 +17,18 @@ function preload() {
   waterRipple = loadImage("assets/water ripple.png");
   waterColor = loadImage("assets/water color.png");
   lilyPadShadow = loadImage("assets/lily pad shadow.png");
+  
+  // Load the music file.
+  preloadWillowAudio();
 }
 
 
 function setup() {
   createCanvas(1500, 1440);
+  
+  // Set up the FFT analyser, willow lengths and playback button.
+  createCanvas(windowWidth, windowHeight);
+  setupWillowAudio();
 
   // moiseLayer
   colorNoise = new NoiseLayer(
@@ -65,6 +72,8 @@ function setup() {
 function draw() {
   background(0, 83, 100);
 
+  // Draw the willow branches using the current audio values.
+  drawWillowAudio();
 
   // Water base
   colorNoise.run();
@@ -84,4 +93,10 @@ function draw() {
 
   // Lily pad stays static
   image(lilyPad, 0, 0);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  // Reposition the audio button after resizing.
+  resizeWillowAudio();
 }
