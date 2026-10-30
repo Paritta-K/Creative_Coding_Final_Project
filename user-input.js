@@ -50,8 +50,8 @@ function drawUserLilyPads() {
 // Temporary flower data for independent testing.
 // These flowers can later be replaced by the group's flower data.
 let userFlowers = [
-  { x: 150, y: 130, isOpen: false },
-  { x: 350, y: 250, isOpen: true }
+  { x: 150, y: 130, isOpen: false, openness: 0 },
+  { x: 350, y: 250, isOpen: true, openness: 1 }
 ];
 
 // Check whether the user clicked on an existing flower.
@@ -76,38 +76,40 @@ function checkUserFlowerClick() {
 }
 
 // Draw the existing flowers.
+// Draw flowers with smooth opening and closing animation.
 function drawUserFlowers() {
 
   for (let flower of userFlowers) {
 
+    // Choose the target openness.
+    let target = flower.isOpen ? 1 : 0;
+
+    // Smoothly move towards the target.
+    flower.openness = lerp(flower.openness, target, 0.08);
+
     push();
     translate(flower.x, flower.y);
-
     noStroke();
 
-    if (flower.isOpen) {
+    // Draw five petals.
+    fill(245, 185, 205);
 
-      // Open flower: five visible petals.
-      fill(245, 185, 205);
+    for (let i = 0; i < 5; i++) {
+      push();
 
-      for (let i = 0; i < 5; i++) {
-        push();
-        rotate(i * TWO_PI / 5);
-        ellipse(0, -15, 18, 32);
-        pop();
-      }
+      rotate(i * TWO_PI / 5);
 
-    } else {
+      // Petals spread out as the flower opens.
+      let petalY = lerp(-5, -15, flower.openness);
+      let petalWidth = lerp(10, 18, flower.openness);
+      let petalHeight = lerp(25, 32, flower.openness);
 
-      // Closed flower: small overlapping petals.
-      fill(220, 130, 170);
+      ellipse(0, petalY, petalWidth, petalHeight);
 
-      ellipse(-6, 0, 12, 25);
-      ellipse(6, 0, 12, 25);
-      ellipse(0, -4, 12, 30);
+      pop();
     }
 
-    // Flower centre.
+    // Draw the flower centre.
     fill(245, 205, 90);
     circle(0, 0, 10);
 
