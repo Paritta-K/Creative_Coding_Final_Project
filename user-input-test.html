@@ -14,25 +14,35 @@
       createCanvas(600, 400);
     }
 
-    function draw() {
-      // Temporary pond background for testing
-      background(80, 130, 150);
+   function draw() {
+  // Temporary pond background for testing
+  background(80, 130, 150);
 
-      // Draw the lily pads from user-input.js
-      drawUserLilyPads();
-    }
+  // Draw user-created lily pads
+  drawUserLilyPads();
 
+  // Draw existing interactive flowers
+  drawUserFlowers();
+}
     function mousePressed() {
-      // Only add lily pads when clicking inside the canvas
-      if (
-        mouseX >= 0 &&
-        mouseX <= width &&
-        mouseY >= 0 &&
-        mouseY <= height
-      ) {
-        addUserLilyPad();
-      }
+
+  // Only respond to clicks inside the canvas
+  if (
+    mouseX >= 0 &&
+    mouseX <= width &&
+    mouseY >= 0 &&
+    mouseY <= height
+  ) {
+
+    // Check if an existing flower was clicked
+    let clickedFlower = checkUserFlowerClick();
+
+    // Add a lily pad only when no flower was clicked
+    if (!clickedFlower) {
+      addUserLilyPad();
     }
+  }
+}
   </script>
 </body>
 </html>
