@@ -94,11 +94,29 @@ function draw() {
   
   // Draw the willow branches using the current audio values.
   drawWillowAudio();
+// Draw the lily pads created by the user.
+drawUserLilyPads();
 
+// Draw the interactive flowers.
+drawUserFlowers();
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   // Reposition the audio button after resizing.
   resizeWillowAudio();
+}
+// Handle mouse interactions.
+function mousePressed() {
+
+  // Click a flower to open or close it.
+  if (checkUserFlowerClick()) {
+    return;
+  }
+
+  // Click inside the canvas to add a lily pad.
+  if (mouseX >= 0 && mouseX < width &&
+      mouseY >= 0 && mouseY < height) {
+    addUserLilyPad();
+  }
 }
