@@ -1,8 +1,9 @@
 class NoiseLayer {
 
-  constructor(img, stripH, moveX, moveY, speed) {
+    constructor(stripH, moveX, moveY, speed, image_path) {
+    //constructor(img, stripH, moveX, moveY, speed) {
 
-    this.img = img;
+    //this.img = img;
 
 
     // Horizontal strip size
@@ -25,6 +26,8 @@ class NoiseLayer {
     // smooth control
     // nearby strips move together
     this.noiseScale = 0.015;
+
+    this.img = loadImage(image_path);
   }
 
 
@@ -48,9 +51,9 @@ class NoiseLayer {
     ) {
 
 
-      // --------------------------
+      
       // X MOVEMENT
-      // --------------------------
+     
 
       let noiseX = noise(
         y * this.noiseScale,
@@ -68,7 +71,7 @@ class NoiseLayer {
 
 
   
-
+        // Y MOVEMENT
       let noiseY = noise(
         y * this.noiseScale + 100,
         this.time

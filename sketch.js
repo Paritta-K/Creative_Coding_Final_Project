@@ -1,10 +1,5 @@
-let lilyPad;
-let waterShine;
-let waterRipple;
-let waterColor;
-let lilyPadShadow;
 
-// Noise
+let lilyPad;
 let colorNoise;
 let rippleNoise;
 let shineNoise;
@@ -12,16 +7,16 @@ let lilyPadShadowNoise;
 
 
 function preload() {
+ // Load image and Noise function
   lilyPad = loadImage("assets/lilyPad.png");
-  waterShine = loadImage("assets/water shine.png");
-  waterRipple = loadImage("assets/water ripple.png");
-  waterColor = loadImage("assets/water color.png");
-  lilyPadShadow = loadImage("assets/lily pad shadow.png");
+  shineNoise = new NoiseLayer(10,50,10,0.004,"assets/water shine.png");
+  rippleNoise = new NoiseLayer(15,50,0,0.004,"assets/water ripple.png");
+  colorNoise = new NoiseLayer(15,50,10,0.002,"assets/water color.png");
+  lilyPadShadowNoise = new NoiseLayer(5,15,0,0.004,"assets/lily pad shadow.png"); 
   
   // Load the music file.
   preloadWillowAudio();
 }
-
 
 function setup() {
   createCanvas(1500, 1440);
@@ -30,43 +25,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   setupWillowAudio();
 
-  // moiseLayer
-  colorNoise = new NoiseLayer(
-    waterColor,
-    50,        // height
-    20,        // horizontal movement
-    10,      // vertical movement
-    0.002     // speed
-  );
-
-
-  // More noticeable ripple movement
-  rippleNoise = new NoiseLayer(
-    waterRipple,
-    30,
-    50,
-    0,
-    0.004
-  );
-
-
-  // Slightly faster light movement
-  shineNoise = new NoiseLayer(
-    waterShine,
-    10,
-    40,
-    0,
-    0.004
-  );
-
-  lilyPadShadowNoise = new NoiseLayer(
-    lilyPadShadow,
-    40,
-    30,
-    0,
-    0.004
-
-  );
+  
 }
 
 function draw() {
@@ -75,23 +34,18 @@ background(getTimeColor());
   // Water base
   colorNoise.run();
 
-
   // Water ripples
   rippleNoise.run();
-
 
   // Water highlights
   shineNoise.run();
 
-
   // Lily pad shadow stays mostly static
   lilyPadShadowNoise.run();
-
 
   // Lily pad stays static
   image(lilyPad, 0, 0);
 
-  
   // Draw the willow branches using the current audio values.
   drawWillowAudio();
 // Draw the lily pads created by the user.
