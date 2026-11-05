@@ -1,9 +1,7 @@
 class NoiseLayer {
 
     constructor(stripH, moveX, moveY, speed, image_path) {
-    //constructor(img, stripH, moveX, moveY, speed) {
-
-    //this.img = img;
+    
 
 
     // Horizontal strip size
