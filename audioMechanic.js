@@ -1,4 +1,4 @@
-// Audio mechanic adapted from the Week 10 p5.js FFT tutorial.
+// Audio mechanic - Monet Water Lilies.
 // ChatGPT helped develop the willow visual and organise the code into separate files.
 
 let song;
@@ -27,7 +27,8 @@ function setupWillowAudio() {
 
   fft = new p5.FFT(smoothing, numBins);
   song.connect(fft);
-
+  song.setLoop(true);
+  
   button = createButton("Play/Pause");
   button.mousePressed(playPause);
   positionButton();
@@ -88,11 +89,12 @@ function drawWillow(x, length, willowColor) {
   line(x + 2, length * 0.75, x + 7, length * 0.75 + 8);
 }
 
+// Pause and resume from the same point in the song.
 function playPause() {
   if (song.isPlaying()) {
-    song.stop();
+    song.pause();
   } else {
-    song.loop();
+    song.play();
   }
 }
 
