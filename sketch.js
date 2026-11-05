@@ -46,14 +46,15 @@ background(getTimeColor());
   // Lily pad stays static
   image(lilyPad, 0, 0);
 
-  // Draw the willow branches using the current audio values.
-  drawWillowAudio();
+  
 // Draw the lily pads created by the user.
 drawUserLilyPads();
 
 // Draw the interactive flowers.
 drawUserFlowers();
   drawLilyPadFlowers();
+  // Draw the willow branches using the current audio values.
+  drawWillowAudio();
   // Apply the time-of-day light to the complete scene.
 drawTimeLighting();
 }
