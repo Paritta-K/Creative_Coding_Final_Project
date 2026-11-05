@@ -99,6 +99,7 @@ drawUserLilyPads();
 
 // Draw the interactive flowers.
 drawUserFlowers();
+  drawLilyPadFlowers();
   // Apply the time-of-day light to the complete scene.
 drawTimeLighting();
 }
@@ -117,7 +118,10 @@ function mousePressed(event) {
   if (checkUserFlowerClick()) {
     return;
   }
-
+// Click a lily pad to create or toggle its flower.
+if (checkUserLilyPadClick()) {
+  return;
+}
   // Click inside the canvas to add a lily pad.
   if (mouseX >= 0 && mouseX < width &&
       mouseY >= 0 && mouseY < height) {
