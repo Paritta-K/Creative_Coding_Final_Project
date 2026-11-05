@@ -1,40 +1,50 @@
+// Time-based mechanic - Monet Water Lilies.
+// Developed with assistance from ChatGPT (OpenAI).
+const cycleDuration = 60000; // A complete day takes 60 seconds.
 
- // Time-based Mechanic - Monet Water Lilies
- // Developed with assistance from ChatGPT (OpenAI).
- // This code uses p5.js millis() to track a repeating day-night cycle.
+// Each quarter holds its light briefly, then eases into the next phase.
+function getTimeProgress() {
+  return (millis() % cycleDuration) / cycleDuration;
+}
 
- const cycleDuration = 60000; // One full cycle takes 60 seconds
+function getTimePhase() {
+  const phases = ["Day", "Dusk", "Night", "Dawn"];
+  return phases[floor(getTimeProgress() * 4)];
+}
 
- function getTimePhase() {
-   let progress = (millis() % cycleDuration) / cycleDuration;
+function blendTimeColors(colors) {
+  const position = getTimeProgress() * 4;
+  const index = floor(position);
+  const transition = constrain(map(position - index, 0.3, 1, 0, 1), 0, 1);
+  const amount = transition * transition * (3 - 2 * transition);
+  return lerpColor(colors[index], colors[(index + 1) % colors.length], amount);
+}
 
-   if (progress < 0.25) {
-     return "Day";
-   } else if (progress < 0.5) {
-     return "Dusk";
-   } else if (progress < 0.75) {
-     return "Night";
-   } else {
-     return "Dawn";
-   }
- }
+function getTimeColor() {
+  return blendTimeColors([
+    color(160, 210, 235),
+    color(245, 150, 115),
+    color(25, 40, 85),
+    color(250, 195, 155)
+  ]);
+}
 
- // Smooth colour transitions between day, dusk, night and dawn.
- // Developed with assistance from ChatGPT (OpenAI).
+function drawTimeLighting() {
+  // The image layers cover the background, so light must also cover them.
+  // Alpha keeps the original painting and interactive elements visible.
+  const light = blendTimeColors([
+    color(255, 242, 205, 0),
+    color(244, 125, 75, 70),
+    color(8, 16, 48, 175),
+    color(249, 176, 162, 55)
+  ]);
 
- function getTimeColor() {
-   let progress = (millis() % cycleDuration) / cycleDuration;
-
-   let day = color(160, 210, 235);
-   let dusk = color(245, 150, 115);
-   let night = color(25, 40, 85);
-   let dawn = color(250, 195, 155);
-
-   let colors = [day, dusk, night, dawn, day];
-
-   let position = progress * 4;
-   let index = floor(position);
-   let amount = position - index;
-
-   return lerpColor(colors[index], colors[index + 1], amount);
- }
+  push();
+  colorMode(RGB, 255);
+  blendMode(BLEND);
+  rectMode(CORNER);
+  noStroke();
+  fill(light);
+  rect(0, 0, width, height);
+  pop();
+}
