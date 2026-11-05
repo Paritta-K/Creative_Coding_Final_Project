@@ -70,7 +70,7 @@ function setup() {
 }
 
 function draw() {
-  background(0, 83, 100);
+background(getTimeColor());
 
   // Water base
   colorNoise.run();
@@ -99,6 +99,8 @@ drawUserLilyPads();
 
 // Draw the interactive flowers.
 drawUserFlowers();
+  // Apply the time-of-day light to the complete scene.
+drawTimeLighting();
 }
 
 function windowResized() {
