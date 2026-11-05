@@ -8,11 +8,14 @@ let userLilyPads = [];
 // Add a new lily pad at the mouse position.
 function addUserLilyPad() {
   let lilyPad = {
-    x: mouseX,
-    y: mouseY,
-    size: 0,
-    targetSize: random(45, 70)
-  };
+  x: mouseX,
+  y: mouseY,
+  size: 0,
+  targetSize: random(45, 70),
+  hasFlower: false,
+  flowerOpen: false,
+  flowerOpenness: 0
+};
 
   userLilyPads.push(lilyPad);
 }
@@ -122,5 +125,79 @@ function drawUserFlowers() {
     circle(0, 0, 10 * flower.openness);
 
     pop();
+  }
+}
+// Check whether the user clicked on a lily pad.
+function checkUserLilyPadClick() {
+  for (let i = userLilyPads.length - 1; i >= 0; i--) {
+    let lilyPad = userLilyPads[i];
+
+    let distance = dist(mouseX, mouseY, lilyPad.x, lilyPad.y);
+
+    // Check whether the click is inside the lily pad.
+    if (distance < lilyPad.size * 0.35) {
+
+      if (!lilyPad.hasFlower) {
+        // Create a flower on this lily pad.
+        lilyPad.hasFlower = true;
+        lilyPad.flowerOpen = true;
+      } else {
+        // Open or close the existing flower.
+        lilyPad.flowerOpen = !lilyPad.flowerOpen;
+      }
+
+      return true;
+    }
+  }
+
+  return false;
+}
+// Draw flowers growing on user-created lily pads.
+// AI-assisted code for the additional user input interaction.
+function drawLilyPadFlowers() {
+  for (let lilyPad of userLilyPads) {
+
+    if (lilyPad.hasFlower) {
+
+      // Smoothly open or close the flower.
+      let target = lilyPad.flowerOpen ? 1 : 0;
+      lilyPad.flowerOpenness = lerp(
+        lilyPad.flowerOpenness,
+        target,
+        0.08
+      );
+
+      push();
+      translate(lilyPad.x, lilyPad.y);
+      noStroke();
+
+      // Draw five pink petals.
+      fill(245, 185, 205);
+
+      for (let i = 0; i < 5; i++) {
+        push();
+        rotate(i * TWO_PI / 5);
+
+        let petalY = lerp(-3, -15, lilyPad.flowerOpenness);
+        let petalWidth = lerp(0, 18, lilyPad.flowerOpenness);
+        let petalHeight = lerp(0, 32, lilyPad.flowerOpenness);
+
+        ellipse(0, petalY, petalWidth, petalHeight);
+
+        pop();
+      }
+
+      // Draw the closed flower bud.
+      fill(220, 130, 170);
+      let budWidth = lerp(16, 0, lilyPad.flowerOpenness);
+      let budHeight = lerp(30, 0, lilyPad.flowerOpenness);
+      ellipse(0, -8, budWidth, budHeight);
+
+      // Draw the yellow centre when the flower opens.
+      fill(245, 205, 90);
+      circle(0, 0, 10 * lilyPad.flowerOpenness);
+
+      pop();
+    }
   }
 }

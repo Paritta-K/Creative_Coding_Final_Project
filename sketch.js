@@ -53,6 +53,7 @@ drawUserLilyPads();
 
 // Draw the interactive flowers.
 drawUserFlowers();
+  drawLilyPadFlowers();
   // Apply the time-of-day light to the complete scene.
 drawTimeLighting();
 }
@@ -63,13 +64,18 @@ function windowResized() {
   resizeWillowAudio();
 }
 // Handle mouse interactions.
-function mousePressed() {
+function mousePressed(event) {
+  // Clicking the audio button should not create a lily pad.
+  if (event.target === button.elt) return;
 
   // Click a flower to open or close it.
   if (checkUserFlowerClick()) {
     return;
   }
-
+// Click a lily pad to create or toggle its flower.
+if (checkUserLilyPadClick()) {
+  return;
+}
   // Click inside the canvas to add a lily pad.
   if (mouseX >= 0 && mouseX < width &&
       mouseY >= 0 && mouseY < height) {
