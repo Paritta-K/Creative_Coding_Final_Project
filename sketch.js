@@ -109,7 +109,9 @@ function windowResized() {
   resizeWillowAudio();
 }
 // Handle mouse interactions.
-function mousePressed() {
+function mousePressed(event) {
+  // Clicking the audio button should not create a lily pad.
+  if (event.target === button.elt) return;
 
   // Click a flower to open or close it.
   if (checkUserFlowerClick()) {
