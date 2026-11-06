@@ -57,3 +57,50 @@ The time-based mechanic starts automatically when the sketch runs. No mouse or k
 AI Acknowledgement
 
 I used ChatGPT (OpenAI) to assist with organising the code. ChatGPT’s assistance is acknowledged in code comments in time-mechanic.js.
+
+Shuoxuan Chen -User input
+
+Concept and Interaction
+
+The User Input mechanic allows users to actively participate in Living Water Lilies by interacting with the pond through mouse clicks.
+
+When users click on the water, a new lily pad appears and gradually grows. Clicking on an existing lily pad creates a pink water lily, which can then be opened and closed through further clicks.
+
+This interaction was designed to create a gentle and natural experience that reflects the peaceful atmosphere of Monet's Water Lilies.
+
+Techniques and Implementation
+
+This mechanic uses mouse interaction, arrays, objects, conditional statements, loops, and linear interpolation in p5.js.
+
+mousePressed() detects mouse clicks and triggers the appropriate interaction.
+
+addUserLilyPad() creates a new lily pad at the mouse position.
+
+drawUserLilyPads() updates and draws the lily pads.
+
+checkUserLilyPadClick() detects clicks on existing lily pads and controls their flower states.
+
+drawLilyPadFlowers() draws the flowers and animates their opening and closing.
+
+dist() calculates the distance between the mouse position and an interactive object.
+
+lerp() creates smooth growth and blooming animations.
+
+Arrays and objects store the positions, sizes, and interaction states of the lily pads.
+
+Code Structure
+
+The User Input mechanic is implemented in a separate file, user-input.js, and integrated into the main sketch.js file. This modular structure helps keep the code organised and separates the mechanic from other parts of the project.
+
+Interaction Instructions
+
+1. Click on an empty area of the pond to create a new lily pad.
+2. Wait for the lily pad to grow, then click on it to create a pink water lily.
+3. Click on the flower again to close it.
+4. Click again to reopen the flower.
+
+Users can repeat these interactions to create multiple lily pads and flowers across the pond.
+
+AI Acknowledgement
+
+ChatGPT was used to assist with developing and refining the User Input mechanic. It helped with organising the interaction logic, implementing mouse-click detection, and improving the smooth growth and flower animations.
