@@ -1,13 +1,20 @@
 # Creative_Coding_Final_Project
 
+Paritta Kijmahanon
+
 Inspiration
-Inspired by the painting "Lily pond" by Claude Monet.
+Inspired by the painting "Lily pond" by Claude Monet, I design the water ripple to have a shape like paint brush slowly swaying, reminiscing water surface in the impressionism painting. Each layer have different movement speed value to give an illusion of depth and dynamic.
 
 
 Techniques
 
-Perlin - Use map to convert noise value (0,1) into movement value (-this.moveX to this.moveX),(-this.moveY to this.moveY) to use noise value to influenced objects offset using Time.
+Perlin Noise function is created seperatedly in noiseSurface.js. The class contains constructor for image strip size, movement of x and y axis, speed of the movement, and image path.
 
+ The image is divided into horizontal strips, each influenced by a Perlin noise value that changes over time. 
+ 
+ The map() function converts the noise values (0–1) into movement ranges (-this.moveX to this.moveX and -this.moveY to this.moveY).
+ 
+These values are then used to offset each strip's X and Y positions, creating a smooth, continuous distortion effect that simulates water movement.
 
 
 Mechanic Ownership
@@ -16,19 +23,10 @@ Perlin Noise is used to create a water surface effect. The level of movement is 
 
 
 AI acknowledgement
-ChatGPT is used to generate the code example base on the input function, which then later altered to fit the project.
-
-
-External Reference
-
-
+ChatGPT is used to help assisted in initial findings and debugging error. ChatGPT’s assistance is acknowledged in code comments in noiseSurface.js.
 
 Interaction Instructions
-
-Click the water to generate the lilypad.
-Click again on the lilypad to generate water lily.
-Click on water lily to make the flower bloom and shut.
-Press Play/Pause to play music.
+Perlin Noise operated as the project's background element. Images used are tailored to fit the visual of the user interaction mechanics and fit the lighting of the time-based mechanic as much as possible.
 
 
 
