@@ -1,6 +1,6 @@
 # Creative_Coding_Final_Project
 
-Paritta Kijmahanon
+Paritta Kijmahanon (Perlin Noise and Randomness)
 
 Inspiration
 Inspired by the painting "Lily pond" by Claude Monet, I design the water ripple to have a shape like paint brush slowly swaying, reminiscing water surface in the impressionism painting. Each layer have different movement speed value to give an illusion of depth and dynamic.
@@ -16,6 +16,8 @@ Perlin Noise function is created seperatedly in noiseSurface.js. The class conta
  
 These values are then used to offset each strip's X and Y positions, creating a smooth, continuous distortion effect that simulates water movement.
 
+Randomness is put into perlin noise strength to create more subtle and smooth difference in the movement.
+
 
 Mechanic Ownership
 Perlin Noise - Paritta Kijmahanon
@@ -27,6 +29,11 @@ ChatGPT is used to help assisted in initial findings and debugging error. ChatGP
 
 Interaction Instructions
 Perlin Noise operated as the project's background element. Images used are tailored to fit the visual of the user interaction mechanics and fit the lighting of the time-based mechanic as much as possible.
+
+
+
+
+
 
 
 
@@ -57,6 +64,11 @@ The time-based mechanic starts automatically when the sketch runs. No mouse or k
 AI Acknowledgement
 
 I used ChatGPT (OpenAI) to assist with organising the code. ChatGPT’s assistance is acknowledged in code comments in time-mechanic.js.
+
+
+
+
+
 
 Shuoxuan Chen -User input
 

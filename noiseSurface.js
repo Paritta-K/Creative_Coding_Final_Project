@@ -23,6 +23,10 @@ class NoiseLayer {
     // nearby strips move together
     this.noiseScale = 0.015;
 
+    // Random starting position in Perlin noise
+    this.randomSeedX = random(1000);
+    this.randomSeedY = random(1000);
+
     this.img = loadImage(image_path);
   }
 
@@ -52,9 +56,10 @@ class NoiseLayer {
 
       // generate noise for X axis, determine by y position
       let noiseX = noise(
-        y * this.noiseScale,
+        y * this.noiseScale + this.randomSeedX,
         this.time
       );
+
 
       // influence x position, determine the range of movement
       let offsetX = map(
@@ -71,7 +76,7 @@ class NoiseLayer {
 
       // generate noise for y axis, different perlin noise valur than x
       let noiseY = noise(
-        y * this.noiseScale + 100,
+        y * this.noiseScale + + this.randomSeedY,
         this.time
       );
 
@@ -83,6 +88,22 @@ class NoiseLayer {
         -this.moveY,
         this.moveY
       );
+
+      // Generate smoothly changing ripple strength
+      let rippleStrength = map(
+        noise(
+          y * 0.02 + this.randomSeedX,
+          this.time * 0.5
+        ),
+        0,
+        1,
+        0.5,
+        1.5
+      );
+
+      // Apply variation to movement
+      offsetX *= rippleStrength;
+      offsetY *= rippleStrength;
 
 
 
@@ -118,4 +139,4 @@ class NoiseLayer {
 }
 
 /* ChatGPT is used to create an example of the code structure, 
-which is then modified to suits the purpose of he class*/
+which is then modified to match with the images and outcome*/
