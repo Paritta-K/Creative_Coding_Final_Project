@@ -116,3 +116,25 @@ Users can repeat these interactions to create multiple lily pads and flowers acr
 AI Acknowledgement
 
 ChatGPT was used to assist with developing and refining the User Input mechanic. It helped with organising the interaction logic, implementing mouse-click detection, and improving the smooth growth and flower animations.
+
+
+Audio Mechanic（Yan Zhang）
+
+Inspiration
+Monet’s *Water Lilies* inspired me to add willow branches hanging over the pond. I wanted the branches to move gently with the music while keeping colours that fit the painting.
+
+Techniques
+p5.FFT reads values from different parts of the music. Each willow branch uses one value. map() turns the value into a branch length, and lerp() makes the change smooth. The audio code is in audioMechanic.js and is called from sketch.js.
+
+Mechanic ownership
+I designed and implemented the Audio mechanic. Music controls the length of twelve willow branches.
+
+AI acknowledgement
+I used ChatGPT (OpenAI) to help draw the willow branches, organise my code into a separate file, and fix the pause and button-click issues. I tested the changes in the running project. AI assistance is also noted in my code comments.
+
+External references
+Music: “Friday Morning” by Kevin MacLeod (https://incompetech.com/music/royalty-free/index.html?Search=Search&isrc=USUAN1100224）
+
+Interaction instructions
+Click **Play/Pause** to play or pause the music. Click again to continue from the same point. Watch the willow branches grow longer and shorter with the music.
+
