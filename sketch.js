@@ -7,29 +7,29 @@ let lilyPadShadowNoise;
 
 
 function preload() {
- // Load image and Noise function
+  // Load image and Noise function
   lilyPad = loadImage("assets/lilyPad.png");
-  shineNoise = new NoiseLayer(10,50,10,0.004,"assets/water shine.png");
-  rippleNoise = new NoiseLayer(15,50,0,0.004,"assets/water ripple.png");
-  colorNoise = new NoiseLayer(15,50,10,0.002,"assets/water color.png");
-  lilyPadShadowNoise = new NoiseLayer(5,15,0,0.004,"assets/lily pad shadow.png"); 
-  
+  shineNoise = new NoiseLayer(10, 50, 10, 0.004, "assets/water shine.png");
+  rippleNoise = new NoiseLayer(15, 50, 0, 0.004, "assets/water ripple.png");
+  colorNoise = new NoiseLayer(15, 50, 10, 0.002, "assets/water color.png");
+  lilyPadShadowNoise = new NoiseLayer(5, 15, 0, 0.004, "assets/lily pad shadow.png");
+
   // Load the music file.
   preloadWillowAudio();
 }
 
 function setup() {
   createCanvas(1500, 1440);
-  
+
   // Set up the FFT analyser, willow lengths and playback button.
   createCanvas(windowWidth, windowHeight);
   setupWillowAudio();
 
-  
+
 }
 
 function draw() {
-background(getTimeColor());
+  background(getTimeColor());
 
   // Water base
   colorNoise.run();
@@ -46,17 +46,17 @@ background(getTimeColor());
   // Lily pad stays static
   image(lilyPad, 0, 0);
 
-  
-// Draw the lily pads created by the user.
-drawUserLilyPads();
 
-// Draw the interactive flowers.
-drawUserFlowers();
+  // Draw the lily pads created by the user.
+  drawUserLilyPads();
+
+  // Draw the interactive flowers.
+  drawUserFlowers();
   drawLilyPadFlowers();
   // Draw the willow branches using the current audio values.
   drawWillowAudio();
   // Apply the time-of-day light to the complete scene.
-drawTimeLighting();
+  drawTimeLighting();
 }
 
 function windowResized() {
@@ -73,13 +73,13 @@ function mousePressed(event) {
   if (checkUserFlowerClick()) {
     return;
   }
-// Click a lily pad to create or toggle its flower.
-if (checkUserLilyPadClick()) {
-  return;
-}
+  // Click a lily pad to create or toggle its flower.
+  if (checkUserLilyPadClick()) {
+    return;
+  }
   // Click inside the canvas to add a lily pad.
   if (mouseX >= 0 && mouseX < width &&
-      mouseY >= 0 && mouseY < height) {
+    mouseY >= 0 && mouseY < height) {
     addUserLilyPad();
   }
 }

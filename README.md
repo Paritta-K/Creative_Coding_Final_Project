@@ -6,7 +6,7 @@ Inspired by the painting "Lily pond" by Claude Monet.
 
 Techniques
 
-Perlin - Use map to convert noise value (0,1) into movement value (-this.moveX to this.moveX),(-this.moveY to this.moveY) to use noise value to influenced objects offset.
+Perlin - Use map to convert noise value (0,1) into movement value (-this.moveX to this.moveX),(-this.moveY to this.moveY) to use noise value to influenced objects offset using Time.
 
 
 

@@ -1,8 +1,6 @@
 class NoiseLayer {
 
-    constructor(stripH, moveX, moveY, speed, image_path) {
-    
-
+  constructor(stripH, moveX, moveY, speed, image_path) {
 
     // Horizontal strip size
     this.stripH = stripH;
@@ -31,7 +29,7 @@ class NoiseLayer {
 
   update() {
 
-    
+
     this.time += this.speed;
 
   }
@@ -49,16 +47,16 @@ class NoiseLayer {
     ) {
 
 
-      
-      // X MOVEMENT
-     
 
+      // X MOVEMENT
+
+      // generate noise for X axis, determine by y position
       let noiseX = noise(
         y * this.noiseScale,
         this.time
       );
 
-
+      // influence x position, determine the range of movement
       let offsetX = map(
         noiseX,
         0,
@@ -68,14 +66,16 @@ class NoiseLayer {
       );
 
 
-  
-        // Y MOVEMENT
+
+      // Y MOVEMENT
+
+      // generate noise for y axis, different perlin noise valur than x
       let noiseY = noise(
         y * this.noiseScale + 100,
         this.time
       );
 
-
+      // influence y position, determine the range of movement
       let offsetY = map(
         noiseY,
         0,
@@ -85,18 +85,20 @@ class NoiseLayer {
       );
 
 
-     
 
+      // draw image
       image(
         this.img,
 
-        
+
+        // strip drawn on image
         offsetX,
         y + offsetY,
         this.img.width,
-        this.stripH + 1,
+        this.stripH,
 
-       
+
+        // how original image is copied
         0,
         y,
         this.img.width,
@@ -105,7 +107,7 @@ class NoiseLayer {
     }
   }
 
-
+  // combine update and display into single method.
   run() {
 
     this.update();
@@ -114,3 +116,6 @@ class NoiseLayer {
 
   }
 }
+
+/* ChatGPT is used to create an example of the code structure, 
+which is then modified to suits the purpose of he class*/
