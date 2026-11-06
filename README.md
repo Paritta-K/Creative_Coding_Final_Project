@@ -118,6 +118,9 @@ AI Acknowledgement
 ChatGPT was used to assist with developing and refining the User Input mechanic. It helped with organising the interaction logic, implementing mouse-click detection, and improving the smooth growth and flower animations.
 
 
+
+
+
 Audio Mechanic（Yan Zhang）
 
 Inspiration
